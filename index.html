@@ -1068,6 +1068,186 @@
         .drawer.open {
             right: 0;
         }
+        /* Centered modal variant (used for Settings) */
+        .drawer.modal-center {
+            top: 50% !important;
+            left: 50% !important;
+            right: auto !important;
+            bottom: auto !important;
+            width: 460px;
+            max-width: 92vw;
+            height: auto;
+            max-height: 86vh;
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transform: translate(-50%, -48%) scale(0.96);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+        .drawer.modal-center.open {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            pointer-events: all;
+        }
+        /* Small password-gate modal */
+        .gate-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -48%) scale(0.96);
+            width: 360px;
+            max-width: 90vw;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 28px;
+            z-index: 3100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+        .gate-modal.open {
+            opacity: 1;
+            pointer-events: all;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .gate-modal h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .gate-modal p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+        .gate-modal .error-msg {
+            display: none;
+            color: var(--accent-4);
+            font-size: 12.5px;
+            margin: 8px 0 0;
+        }
+        .gate-modal .error-msg.show {
+            display: block;
+        }
+        .gate-modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .gate-modal-actions .btn,
+        .gate-modal-actions .btn-primary {
+            flex: 1;
+        }
+        /* Settings sub-sections */
+        .settings-section-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            font-weight: 700;
+            margin: 6px 0 -4px;
+        }
+        .tab-toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-sm);
+            font-size: 13.5px;
+            color: var(--text-primary);
+        }
+        .tab-toggle-row span {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 22px;
+            flex-shrink: 0;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .switch-slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 22px;
+            transition: var(--transition);
+        }
+        .switch-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 3px;
+            bottom: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        .switch input:checked + .switch-slider {
+            background: var(--gradient-brand);
+        }
+        .switch input:checked + .switch-slider:before {
+            transform: translateX(18px);
+        }
+        .account-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+        }
+        .account-item .account-meta strong {
+            display: block;
+            font-size: 13.5px;
+        }
+        .account-item .account-meta span {
+            color: var(--text-muted);
+            font-size: 11.5px;
+        }
+        .account-item button {
+            background: var(--bg-card-hover);
+            border: 1px solid var(--border-glass);
+            color: var(--text-primary);
+            border-radius: 7px;
+            padding: 6px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .account-item button:hover {
+            border-color: var(--accent-2);
+            color: var(--accent-2);
+        }
+        .drawer .error-msg {
+            display: none;
+            color: var(--accent-4);
+            font-size: 12.5px;
+            margin-top: -8px;
+        }
+        .drawer .error-msg.show {
+            display: block;
+        }
         .drawer-header {
             display: flex;
             justify-content: space-between;
@@ -1680,11 +1860,11 @@
             <div id="loginForm">
                 <div class="form-group">
                     <label>Email</label>
-                    <input class="form-control" id="loginEmail" type="email" placeholder="you@example.com" value="demo@victor.ai">
+                    <input class="form-control" id="loginEmail" type="email" placeholder="you@example.com" value="">
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input class="form-control" id="loginPassword" type="password" placeholder="••••••••" value="demo123">
+                    <input class="form-control" id="loginPassword" type="password" placeholder="••••••••" value="">
                 </div>
                 <div class="remember-row">
                     <input type="checkbox" id="rememberMe" checked>
@@ -1693,19 +1873,20 @@
                 <div class="forgot-link" id="showForgotBtn">Forgot password?</div>
                 <div class="error-msg" id="loginError">Invalid credentials</div>
                 <button class="btn-primary" id="loginBtn">Sign In</button>
-                <div class="auth-footer">
-                    Don't have an account? <a id="showSignupBtn">Create one</a>
-                </div>
             </div>
 
-            <!-- Signup Form -->
+            <!-- Signup Form (bootstrap-only: creates the very first / admin account) -->
             <div id="signupForm" style="display:none;">
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <input class="form-control" id="signupName" placeholder="Victor Johnson">
+                <div style="font-size:12.5px;color:var(--text-secondary);background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:16px;">
+                    <i class="fas fa-shield-halved" style="color:var(--accent-1);"></i>
+                    No account exists yet. Set up the <strong>administrator account</strong> below — after this, only the admin can create accounts for other people.
                 </div>
                 <div class="form-group">
-                    <label>Email</label>
+                    <label>Full Name</label>
+                    <input class="form-control" id="signupName" placeholder="Your name">
+                </div>
+                <div class="form-group">
+                    <label>Email / Username</label>
                     <input class="form-control" id="signupEmail" type="email" placeholder="you@example.com">
                 </div>
                 <div class="form-group">
@@ -1713,10 +1894,7 @@
                     <input class="form-control" id="signupPassword" type="password" placeholder="Min 6 characters">
                 </div>
                 <div class="error-msg" id="signupError">Please fill all fields</div>
-                <button class="btn-primary" id="signupBtn">Create Account</button>
-                <div class="auth-footer">
-                    Already have an account? <a id="showLoginBtn">Sign in</a>
-                </div>
+                <button class="btn-primary" id="signupBtn">Create Admin Account</button>
             </div>
 
             <!-- Forgot Password -->
@@ -1780,6 +1958,7 @@
                     <button class="nav-btn" data-tab="tasks"><i class="fas fa-check-square"></i><span>Tasks</span></button>
                     <button class="nav-btn" data-tab="habits"><i class="fas fa-sync-alt"></i><span>Habits</span></button>
                     <button class="nav-btn" data-tab="savings"><i class="fas fa-wallet"></i><span>Savings</span></button>
+                    <button class="nav-btn" data-tab="reminders"><i class="fas fa-bell"></i><span>Reminders</span></button>
                 </nav>
                 <div class="sidebar-footer">
                     <button class="toggle-btn" id="sidebarToggle"><i class="fas fa-chevron-left" id="toggleIcon"></i><span>Collapse</span></button>
@@ -1905,7 +2084,7 @@
                         </div>
                     </div>
 
-                    <div class="grid-2" style="margin-top:16px;">
+                    <div class="grid-2" style="margin-top:16px;" id="analyticsHabitsRow" data-analytics-module="habits">
                         <div class="glass-card">
                             <div class="card-title" style="margin-bottom:12px;">Streak History</div>
                             <div style="height:160px;"><canvas id="analyticsStreakChart"></canvas></div>
@@ -1918,16 +2097,16 @@
                         </div>
                     </div>
 
-                    <div class="grid-3" style="margin-top:16px;">
-                        <div class="glass-card">
+                    <div class="grid-3" style="margin-top:16px;" id="analyticsMetricsRow">
+                        <div class="glass-card" data-analytics-module="trades">
                             <div class="card-title" style="margin-bottom:8px;">Trading P/L</div>
                             <div style="height:120px;"><canvas id="analyticsTradeChart"></canvas></div>
                         </div>
-                        <div class="glass-card">
+                        <div class="glass-card" data-analytics-module="gym">
                             <div class="card-title" style="margin-bottom:8px;">Gym Sessions</div>
                             <div style="height:120px;"><canvas id="analyticsGymChart"></canvas></div>
                         </div>
-                        <div class="glass-card">
+                        <div class="glass-card" data-analytics-module="savings">
                             <div class="card-title" style="margin-bottom:8px;">Savings Net</div>
                             <div style="height:120px;"><canvas id="analyticsSavingsChart"></canvas></div>
                         </div>
@@ -2102,6 +2281,68 @@
                     </div>
                 </section>
 
+                <!-- ==========================================================
+                REMINDERS
+                ========================================================== -->
+                <section id="tab-reminders" class="tab-section">
+                    <div class="glass-card">
+                        <div class="card-header">
+                            <div><div class="card-title" style="font-size:22px;">Reminders</div><div class="card-subtitle">Scheduled alerts sent to WhatsApp</div></div>
+                            <button class="btn" id="addReminderBtn"><i class="fas fa-plus"></i> New Reminder</button>
+                        </div>
+
+                        <div style="font-size:12.5px;color:var(--text-muted);background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:16px;line-height:1.6;">
+                            <i class="fab fa-whatsapp" style="color:var(--accent-1);"></i>
+                            This checks for due reminders every 20 seconds while this app is open in your browser — closing the tab pauses it. A website can't silently message someone on WhatsApp, so pick how delivery works below: <strong>Manual</strong> pops up a one-tap link that opens a pre-filled WhatsApp chat for you to send; <strong>Automatic (webhook)</strong> POSTs the message to your own automation (Twilio, Meta Cloud API, Make, Zapier, n8n, etc.) which actually sends it — that part needs you to have such a webhook set up.
+                        </div>
+
+                        <div class="flex gap-12 flex-wrap" style="margin-bottom:16px;align-items:flex-end;">
+                            <div class="form-group" style="flex:1;min-width:170px;margin-bottom:0;">
+                                <label>Default WhatsApp Number</label>
+                                <input id="waDefaultNumber" class="form-control" placeholder="+232 76 123456">
+                            </div>
+                            <div class="form-group" style="min-width:190px;margin-bottom:0;">
+                                <label>Delivery Mode</label>
+                                <select id="waDeliveryMode" class="form-control">
+                                    <option value="manual">Manual (tap to send)</option>
+                                    <option value="webhook">Automatic (my webhook)</option>
+                                </select>
+                            </div>
+                            <div class="form-group" id="waWebhookWrap" style="flex:1;min-width:200px;margin-bottom:0;display:none;">
+                                <label>Webhook URL</label>
+                                <input id="waWebhookUrl" class="form-control" placeholder="https://your-automation.example.com/hook">
+                            </div>
+                            <button class="btn btn-ghost" id="waDesktopNotifBtn" style="height:42px;white-space:nowrap;"><i class="fas fa-bell"></i> Enable Desktop Alerts</button>
+                            <button class="btn" id="saveWaSettingsBtn" style="height:42px;"><i class="fas fa-save"></i> Save</button>
+                        </div>
+
+                        <div style="overflow-x:auto;">
+                            <table class="table" style="width:100%;border-collapse:collapse;font-size:14px;">
+                                <thead><tr style="color:var(--text-muted);border-bottom:1px solid var(--border-glass);">
+                                        <th style="padding:10px 8px;text-align:left;font-weight:600;">Reminder</th>
+                                        <th style="padding:10px 8px;text-align:left;font-weight:600;">Number</th>
+                                        <th style="padding:10px 8px;text-align:left;font-weight:600;">Next Due</th>
+                                        <th style="padding:10px 8px;text-align:left;font-weight:600;">Repeat</th>
+                                        <th style="padding:10px 8px;text-align:left;font-weight:600;">Status</th>
+                                        <th style="padding:10px 8px;text-align:center;font-weight:600;">On</th>
+                                        <th style="padding:10px 8px;text-align:center;font-weight:600;"></th>
+                                </tr></thead>
+                                <tbody id="remindersTbody"></tbody>
+                            </table>
+                        </div>
+                        <div class="empty-state" id="remindersEmpty"><i class="fas fa-bell"></i><p>No reminders yet. Create one to get WhatsApp alerts.</p></div>
+                    </div>
+
+                    <div class="glass-card" style="margin-top:16px;">
+                        <div class="card-header">
+                            <div><div class="card-title" style="font-size:18px;">Notification History</div><div class="card-subtitle">Every delivery attempt, logged</div></div>
+                            <button class="btn btn-sm btn-ghost" id="clearReminderLogBtn"><i class="fas fa-trash"></i> Clear</button>
+                        </div>
+                        <div id="reminderLogList"></div>
+                        <div class="empty-state" id="reminderLogEmpty"><i class="fas fa-history"></i><p>Nothing sent yet.</p></div>
+                    </div>
+                </section>
+
             </main>
         </div>
     </div>
@@ -2112,7 +2353,7 @@
     <div class="overlay" id="overlay"></div>
 
     <!-- Settings Drawer -->
-    <div class="drawer" id="settingsDrawer">
+    <div class="drawer modal-center" id="settingsDrawer">
         <div class="drawer-header">
             <h3><i class="fas fa-cog" style="color:var(--accent-1);"></i> Settings</h3>
             <button class="drawer-close" data-close="settingsDrawer"><i class="fas fa-times"></i></button>
@@ -2123,8 +2364,9 @@
                 <input class="form-control" id="setName" value="Victor">
             </div>
             <div class="form-group">
-                <label>Email</label>
-                <input class="form-control" id="setEmail" type="email" value="demo@victor.ai">
+                <label>Email / Username (login)</label>
+                <input class="form-control" id="setEmail" type="email" value="" readonly style="opacity:0.65;cursor:not-allowed;">
+                <div style="font-size:11.5px;color:var(--text-muted);margin-top:4px;">To change your username or password, use "Change Username &amp; Password" below.</div>
             </div>
             <div class="form-group">
                 <label>Phone</label>
@@ -2167,6 +2409,7 @@
                     <option value="tasks">Tasks</option>
                     <option value="habits">Habits</option>
                     <option value="savings">Savings</option>
+                    <option value="reminders">Reminders</option>
                 </select>
             </div>
             <div class="form-group">
@@ -2189,9 +2432,97 @@
                     </label>
                 </div>
             </div>
+            <div class="settings-section-title">Manage Tabs</div>
+            <div style="display:flex;flex-direction:column;gap:8px;" id="tabManagerList">
+                <!-- populated by JS -->
+            </div>
             <button class="btn" id="saveSettingsBtn" style="width:100%;"><i class="fas fa-save"></i> Save Settings</button>
+
             <hr style="border:none;border-top:1px solid var(--border-glass);margin:4px 0;">
-            <button class="btn btn-danger" id="clearAllDataBtn" style="width:100%;"><i class="fas fa-trash"></i> Clear ALL Data</button>
+            <div class="settings-section-title">Change Username &amp; Password</div>
+            <div class="form-group">
+                <label>Current Password</label>
+                <input class="form-control" id="secCurrentPassword" type="password" placeholder="Enter current password">
+            </div>
+            <div class="form-group">
+                <label>New Username / Email</label>
+                <input class="form-control" id="secNewEmail" type="email" placeholder="Leave blank to keep current">
+            </div>
+            <div class="form-group">
+                <label>New Password</label>
+                <input class="form-control" id="secNewPassword" type="password" placeholder="Leave blank to keep current">
+            </div>
+            <div class="form-group">
+                <label>Confirm New Password</label>
+                <input class="form-control" id="secConfirmPassword" type="password" placeholder="Repeat new password">
+            </div>
+            <div class="error-msg" id="secError">Something went wrong</div>
+            <button class="btn" id="updateAccountBtn" style="width:100%;"><i class="fas fa-user-shield"></i> Update Username / Password</button>
+
+            <hr style="border:none;border-top:1px solid var(--border-glass);margin:4px 0;">
+            <div class="settings-section-title">Accounts</div>
+            <div style="display:flex;flex-direction:column;gap:8px;" id="accountsList">
+                <!-- populated by JS -->
+            </div>
+
+            <!-- Only visible to the admin -->
+            <button class="btn" id="addAccountBtn" style="width:100%;display:none;"><i class="fas fa-user-plus"></i> Create New Account</button>
+            <div id="nonAdminNotice" style="font-size:12px;color:var(--text-muted);display:none;">
+                <i class="fas fa-lock"></i> Only the admin can create new accounts.
+            </div>
+
+            <div id="adminCreateForm" style="display:none;flex-direction:column;gap:12px;background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-sm);padding:14px;">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input class="form-control" id="newAcctName" placeholder="Full name">
+                </div>
+                <div class="form-group">
+                    <label>Email / Username</label>
+                    <input class="form-control" id="newAcctEmail" type="email" placeholder="person@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Temporary Password</label>
+                    <input class="form-control" id="newAcctPassword" type="password" placeholder="Min 6 characters">
+                </div>
+                <div class="form-group">
+                    <label>Role</label>
+                    <select class="form-control" id="newAcctRole">
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="error-msg" id="newAcctError">Something went wrong</div>
+                <div style="display:flex;gap:10px;">
+                    <button class="btn btn-ghost" id="cancelNewAcctBtn" style="flex:1;">Cancel</button>
+                    <button class="btn" id="saveNewAcctBtn" style="flex:1;"><i class="fas fa-check"></i> Create</button>
+                </div>
+            </div>
+
+            <hr style="border:none;border-top:1px solid var(--border-glass);margin:4px 0;">
+            <div class="settings-section-title">Backup &amp; Restore</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:2px;">
+                Everything (trades, tasks, habits, savings, every account) lives only in this browser's storage. Download a backup regularly — clearing your browser data or switching devices loses everything otherwise.
+            </div>
+            <div style="display:flex;gap:10px;">
+                <button class="btn btn-ghost" id="downloadBackupBtn" style="flex:1;"><i class="fas fa-download"></i> Download Backup</button>
+                <button class="btn btn-ghost" id="restoreBackupBtn" style="flex:1;"><i class="fas fa-upload"></i> Restore Backup</button>
+            </div>
+            <input type="file" id="restoreBackupInput" accept="application/json" style="display:none;">
+        </div>
+    </div>
+
+    <!-- Settings Password Gate -->
+    <div class="gate-modal" id="settingsGateModal">
+        <h3><i class="fas fa-lock" style="color:var(--accent-1);"></i> Settings Locked</h3>
+        <p>Enter your account password to access settings.</p>
+        <div class="form-group">
+            <label>Password</label>
+            <input class="form-control" id="settingsGatePassword" type="password" placeholder="••••••••">
+        </div>
+        <div class="error-msg" id="settingsGateError">Incorrect password</div>
+        <div class="gate-modal-actions">
+            <button class="btn btn-ghost" id="settingsGateCancelBtn">Cancel</button>
+            <button class="btn" id="settingsGateUnlockBtn"><i class="fas fa-unlock"></i> Unlock</button>
         </div>
     </div>
 
@@ -2216,7 +2547,7 @@
         </div>
         <div class="form-group">
             <label>Email</label>
-            <input class="form-control" id="profileEmail" type="email" value="demo@victor.ai">
+            <input class="form-control" id="profileEmail" type="email" value="" readonly style="opacity:0.65;cursor:not-allowed;">
         </div>
         <div class="form-group">
             <label>Phone</label>
@@ -2283,6 +2614,52 @@
         <button class="btn" id="saveHabitBtn" style="width:100%;"><i class="fas fa-save"></i> Create Habit</button>
     </div>
 
+    <!-- Add/Edit Reminder Drawer -->
+    <div class="drawer" id="reminderDrawer">
+        <div class="drawer-header"><h3 id="reminderDrawerTitle">New Reminder</h3><button class="drawer-close" data-close="reminderDrawer"><i class="fas fa-times"></i></button></div>
+        <div class="form-group"><label>Title</label><input id="remTitle" class="form-control" placeholder="e.g. Pay internet bill"></div>
+        <div class="form-group">
+            <label>WhatsApp Message</label>
+            <textarea id="remMessage" class="form-control" rows="3" placeholder="Hi {{name}}, &quot;{{title}}&quot; is due at {{time}} on {{date}}."></textarea>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">Tokens: <code>{{title}}</code> <code>{{date}}</code> <code>{{time}}</code> <code>{{name}}</code></div>
+        </div>
+        <div class="form-group"><label>WhatsApp Number</label><input id="remPhone" class="form-control" placeholder="+232 76 123456"></div>
+        <div class="flex gap-12">
+            <div class="form-group" style="flex:1;"><label>Date</label><input id="remDate" class="form-control" type="date"></div>
+            <div class="form-group" style="flex:1;"><label>Time</label><input id="remTime" class="form-control" type="time"></div>
+        </div>
+        <div class="form-group"><label>Repeat</label>
+            <select id="remRepeat" class="form-control">
+                <option value="none">Doesn't repeat</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Also remind me…</label>
+            <div id="remLeadOptions" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;">
+                <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-secondary);"><input type="checkbox" value="1440"> 1 day before</label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-secondary);"><input type="checkbox" value="60"> 1 hour before</label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-secondary);"><input type="checkbox" value="30"> 30 min before</label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-secondary);"><input type="checkbox" value="15"> 15 min before</label>
+                <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-secondary);"><input type="checkbox" value="0" checked> At due time</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label style="display:flex;align-items:center;gap:8px;">
+                <input type="checkbox" id="remOverdueEnabled" checked> Keep reminding me if it becomes overdue
+            </label>
+        </div>
+        <div class="form-group"><label>Overdue repeat interval (minutes)</label><input id="remOverdueEvery" class="form-control" type="number" min="5" value="60"></div>
+        <div class="form-group">
+            <label style="display:flex;align-items:center;gap:8px;">
+                <input type="checkbox" id="remEnabled" checked> Enabled
+            </label>
+        </div>
+        <button class="btn" id="saveReminderBtn" style="width:100%;"><i class="fas fa-save"></i> Save Reminder</button>
+    </div>
+
     <!-- ============================================================
     AI CHAT
     ============================================================ -->
@@ -2335,7 +2712,9 @@
             PROFILE: 'vd_profile_v3',
             ACTIVITY: 'vd_activity_v3',
             AUTH: 'vd_auth_v3',
-            NOTIFICATIONS: 'vd_notifications_v3'
+            NOTIFICATIONS: 'vd_notifications_v3',
+            REMINDERS: 'vd_reminders_v1',
+            REMINDER_LOG: 'vd_reminder_log_v1'
         };
 
         /* ============================================================
@@ -2348,9 +2727,11 @@
             habits: [],
             savings: { weekly: [], monthly: [] },
             settings: { currency: 'NLE', name: 'Victor', defaultTab: 'dashboard', theme: 'dark' },
-            profile: { name: 'Victor', email: 'demo@victor.ai', phone: '', bio: '', location: '', avatar: null },
+            profile: { name: 'Victor', email: '', phone: '', bio: '', location: '', avatar: null },
             activity: [],
             notifications: [],
+            reminders: [],
+            reminderLog: [],
             auth: { loggedIn: false, user: null, remember: false },
             currentTab: 'dashboard',
             sidebarCollapsed: false,
@@ -2362,6 +2743,19 @@
 
         let charts = {};
         let activityInterval = null;
+
+        /* ============================================================
+           MULTI-ACCOUNT STORAGE NAMESPACING
+           Every account gets its own isolated slice of data, keyed by
+           a stable internal user id (not the email, so changing the
+           username/email later never moves or loses data).
+           ============================================================ */
+        let currentUserId = 'guest';
+        const GLOBAL_KEYS = [KEYS.AUTH, 'vd_users_v1'];
+        function userKey(key) {
+            if (GLOBAL_KEYS.includes(key)) return key;
+            return key + '__u_' + currentUserId;
+        }
 
         /* ============================================================
            UTILITIES
@@ -2383,11 +2777,54 @@
         }
 
         function load(key, fallback) {
-            try { const r = localStorage.getItem(key); return r ? JSON.parse(r) : fallback; } catch { return fallback; }
+            try { const r = localStorage.getItem(userKey(key)); return r ? JSON.parse(r) : fallback; } catch { return fallback; }
         }
 
         function save(key, data) {
-            try { localStorage.setItem(key, JSON.stringify(data)); } catch {}
+            try { localStorage.setItem(userKey(key), JSON.stringify(data)); } catch {}
+        }
+
+        /* ============================================================
+           PASSWORD HASHING
+           Passwords are salted and hashed (SHA-256 via the Web Crypto
+           API) before they ever touch localStorage — never stored or
+           compared in plain text. Note: this is still a static,
+           backend-less page, so this protects against a casual read
+           of localStorage/devtools, not against someone running
+           arbitrary JS in the page itself — a real backend is the
+           only fix for that.
+           ============================================================ */
+        function genSalt() {
+            const arr = new Uint8Array(16);
+            crypto.getRandomValues(arr);
+            return Array.from(arr, b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function hashPassword(password, salt) {
+            const enc = new TextEncoder();
+            const buf = await crypto.subtle.digest('SHA-256', enc.encode(salt + ':' + password));
+            return Array.from(new Uint8Array(buf), b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        // Sets a salted hash on a user record (mutates it in place).
+        async function setPassword(record, password) {
+            record.salt = genSalt();
+            record.passwordHash = await hashPassword(password, record.salt);
+            delete record.password;
+        }
+
+        // Verifies a password against a user record. Transparently migrates
+        // any legacy plain-text record to a salted hash on a successful check.
+        async function verifyPassword(record, password) {
+            if (!record) return false;
+            if (record.passwordHash && record.salt) {
+                return (await hashPassword(password, record.salt)) === record.passwordHash;
+            }
+            if (record.password !== undefined && record.password === password) {
+                await setPassword(record, password);
+                return true;
+            }
+            return false;
         }
 
         function showToast(msg, type = 'success') {
@@ -2458,6 +2895,11 @@
         function showAuth() {
             authContainer.classList.add('active');
             appEl.classList.remove('visible');
+            const users = load('vd_users_v1', {});
+            const noAccountsYet = Object.keys(users).length === 0;
+            document.getElementById('loginForm').style.display = noAccountsYet ? 'none' : 'block';
+            document.getElementById('signupForm').style.display = noAccountsYet ? 'block' : 'none';
+            document.getElementById('forgotForm').style.display = 'none';
         }
 
         function hideAuth() {
@@ -2467,8 +2909,9 @@
 
         function checkAuth() {
             const data = load(KEYS.AUTH, null);
-            if (data && data.loggedIn) {
+            if (data && data.loggedIn && data.user) {
                 state.auth = data;
+                currentUserId = data.user.id || data.user.email;
                 if (data.remember) {
                     // auto-login
                     hideAuth();
@@ -2480,65 +2923,113 @@
             return false;
         }
 
-        function doLogin(email, password, remember) {
-            // Demo: accept any email with password length >= 6, or demo@victor.ai / demo123
+        async function doLogin(email, password, remember) {
+            // Only registered accounts can sign in — no demo/bypass credentials.
             const users = load('vd_users_v1', {});
-            if (email === 'demo@victor.ai' && password === 'demo123') {
+            const record = users[email];
+            const wasLegacyPlainText = !!(record && record.password !== undefined);
+            if (record && await verifyPassword(record, password)) {
+                // Migrate older accounts that don't yet have a stable id / role
+                let needsSave = wasLegacyPlainText; // password hash migration also needs saving
+                if (!record.id) { record.id = uid(); needsSave = true; }
+                if (!record.role) {
+                    // If this is the only account on record, treat it as the admin.
+                    record.role = (Object.keys(users).length === 1) ? 'admin' : 'user';
+                    needsSave = true;
+                }
+                if (needsSave) save('vd_users_v1', users);
+                currentUserId = record.id;
                 state.auth.loggedIn = true;
-                state.auth.user = { email, name: state.profile.name || 'Victor' };
-                state.auth.remember = remember;
-                save(KEYS.AUTH, state.auth);
-                hideAuth();
-                initApp();
-                showToast('Welcome back, ' + state.profile.name + '!');
-                return true;
-            }
-            // Check registered users
-            if (users[email] && users[email].password === password) {
-                state.auth.loggedIn = true;
-                state.auth.user = { email, name: users[email].name || email.split('@')[0] };
+                state.auth.user = { id: record.id, email, name: record.name || email.split('@')[0], role: record.role };
                 state.auth.remember = remember;
                 save(KEYS.AUTH, state.auth);
                 // load profile from user data
-                if (users[email].profile) {
-                    state.profile = users[email].profile;
+                if (record.profile) {
+                    state.profile = record.profile;
+                } else {
+                    state.profile = load(KEYS.PROFILE, { name: state.auth.user.name, email, phone: '', bio: '', location: '', avatar: null });
                 }
                 hideAuth();
                 initApp();
-                showToast('Welcome back, ' + state.profile.name + '!');
+                showToast('Welcome back, ' + (state.profile.name || state.auth.user.name) + '!');
                 return true;
             }
             return false;
         }
 
-        function doSignup(name, email, password) {
+        // Creates the very first account (bootstrap only) and makes it the admin.
+        // Regular users are created later by the admin from inside Settings — see adminCreateAccount().
+        async function doSignup(name, email, password) {
             const users = load('vd_users_v1', {});
             if (users[email]) {
                 document.getElementById('signupError').textContent = 'Email already registered';
                 document.getElementById('signupError').classList.add('show');
                 return false;
             }
-            users[email] = { password, name, profile: { name, email, phone: '', bio: '', location: '', avatar: null } };
+            const id = uid();
+            const role = (Object.keys(users).length === 0) ? 'admin' : 'user';
+            const record = { id, name, role, profile: { name, email, phone: '', bio: '', location: '', avatar: null } };
+            await setPassword(record, password);
+            users[email] = record;
             save('vd_users_v1', users);
+            currentUserId = id;
             state.auth.loggedIn = true;
-            state.auth.user = { email, name };
+            state.auth.user = { id, email, name, role };
             state.auth.remember = true;
-            state.profile.name = name;
-            state.profile.email = email;
+            state.profile = { name, email, phone: '', bio: '', location: '', avatar: null };
+            state.settings = { currency: 'NLE', name, defaultTab: 'dashboard', theme: 'dark', enabledTabs: defaultEnabledTabs() };
             save(KEYS.AUTH, state.auth);
             save(KEYS.PROFILE, state.profile);
+            save(KEYS.SETTINGS, state.settings);
             hideAuth();
             initApp();
-            showToast('Account created! Welcome ' + name + ' 🎉');
+            showToast((role === 'admin' ? 'Admin account created! Welcome ' : 'Account created! Welcome ') + name + ' 🎉');
             return true;
+        }
+
+        // Admin-only: creates an account for someone else WITHOUT logging the admin out
+        // or switching the current session. Returns {ok, message}.
+        async function adminCreateAccount(name, email, password, role) {
+            if (!state.auth.user || state.auth.user.role !== 'admin') {
+                return { ok: false, message: 'Only the admin can create accounts.' };
+            }
+            if (!name || !email || !password) {
+                return { ok: false, message: 'Please fill in all fields.' };
+            }
+            if (password.length < 6) {
+                return { ok: false, message: 'Password must be at least 6 characters.' };
+            }
+            const users = load('vd_users_v1', {});
+            if (users[email]) {
+                return { ok: false, message: 'That email/username is already registered.' };
+            }
+            const id = uid();
+            const record = {
+                id, name,
+                role: role === 'admin' ? 'admin' : 'user',
+                profile: { name, email, phone: '', bio: '', location: '', avatar: null }
+            };
+            await setPassword(record, password);
+            users[email] = record;
+            save('vd_users_v1', users);
+            // Seed default settings for the new user's own isolated storage slice,
+            // without touching anything belonging to the currently logged-in admin.
+            const prevUserId = currentUserId;
+            currentUserId = id;
+            save(KEYS.SETTINGS, { currency: 'NLE', name, defaultTab: 'dashboard', theme: 'dark', enabledTabs: defaultEnabledTabs() });
+            save(KEYS.PROFILE, { name, email, phone: '', bio: '', location: '', avatar: null });
+            currentUserId = prevUserId;
+            return { ok: true, message: 'Account created for ' + name + ' ✓' };
         }
 
         function doLogout() {
             state.auth.loggedIn = false;
             state.auth.remember = false;
             save(KEYS.AUTH, state.auth);
+            currentUserId = 'guest';
             appEl.classList.remove('visible');
             showAuth();
+            closeAllDrawers();
             showToast('Logged out', 'info');
             // reset UI
             document.querySelectorAll('.tab-section').forEach(el => el.classList.remove('active'));
@@ -2546,16 +3037,6 @@
         }
 
         // Auth UI Events
-        document.getElementById('showSignupBtn').addEventListener('click', () => {
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('signupForm').style.display = 'block';
-            document.getElementById('forgotForm').style.display = 'none';
-        });
-        document.getElementById('showLoginBtn').addEventListener('click', () => {
-            document.getElementById('loginForm').style.display = 'block';
-            document.getElementById('signupForm').style.display = 'none';
-            document.getElementById('forgotForm').style.display = 'none';
-        });
         document.getElementById('showForgotBtn').addEventListener('click', () => {
             document.getElementById('loginForm').style.display = 'none';
             document.getElementById('signupForm').style.display = 'none';
@@ -2567,7 +3048,7 @@
             document.getElementById('forgotForm').style.display = 'none';
         });
 
-        document.getElementById('loginBtn').addEventListener('click', () => {
+        document.getElementById('loginBtn').addEventListener('click', async () => {
             const email = document.getElementById('loginEmail').value.trim();
             const pass = document.getElementById('loginPassword').value;
             const remember = document.getElementById('rememberMe').checked;
@@ -2575,7 +3056,7 @@
             if (!email || !pass) { err.textContent = 'Please fill in all fields';
                 err.classList.add('show'); return; }
             err.classList.remove('show');
-            if (doLogin(email, pass, remember)) {
+            if (await doLogin(email, pass, remember)) {
                 // success
             } else {
                 err.textContent = 'Invalid email or password';
@@ -2588,7 +3069,7 @@
         document.getElementById('loginEmail').addEventListener('keydown', e => { if (e.key === 'Enter') document
                 .getElementById('loginBtn').click(); });
 
-        document.getElementById('signupBtn').addEventListener('click', () => {
+        document.getElementById('signupBtn').addEventListener('click', async () => {
             const name = document.getElementById('signupName').value.trim();
             const email = document.getElementById('signupEmail').value.trim();
             const pass = document.getElementById('signupPassword').value;
@@ -2598,7 +3079,7 @@
             if (pass.length < 6) { err.textContent = 'Password must be at least 6 characters';
                 err.classList.add('show'); return; }
             err.classList.remove('show');
-            doSignup(name, email, pass);
+            await doSignup(name, email, pass);
         });
 
         document.getElementById('forgotBtn').addEventListener('click', () => {
@@ -2610,7 +3091,10 @@
             if (!users[email]) { err.textContent = 'Email not found';
                 err.classList.add('show'); return; }
             err.classList.remove('show');
-            showToast('Password reset link sent to ' + email, 'info');
+            // This is a static, backend-less page — there's no email server to send a
+            // reset link from. Be upfront about that instead of faking a success toast;
+            // an admin has to reset the password from Settings → Accounts instead.
+            showToast('This app has no email service to send a reset link. Ask your admin to reset your password from Settings → Accounts.', 'warning');
             document.getElementById('forgotEmail').value = '';
         });
 
@@ -2624,13 +3108,17 @@
             state.habits = load(KEYS.HABITS, []);
             state.savings = load(KEYS.SAVINGS, { weekly: [], monthly: [] });
             state.settings = load(KEYS.SETTINGS, { currency: 'NLE', name: 'Victor', defaultTab: 'dashboard', theme: 'dark' });
-            state.profile = load(KEYS.PROFILE, { name: 'Victor', email: 'demo@victor.ai', phone: '', bio: '', location: '',
+            state.profile = load(KEYS.PROFILE, { name: 'Victor', email: '', phone: '', bio: '', location: '',
                 avatar: null });
             state.activity = load(KEYS.ACTIVITY, []);
             state.notifications = load(KEYS.NOTIFICATIONS, []);
+            state.reminders = load(KEYS.REMINDERS, []);
+            state.reminderLog = load(KEYS.REMINDER_LOG, []);
             // Ensure savings has weekly/monthly
             if (!state.savings.weekly) state.savings.weekly = [];
             if (!state.savings.monthly) state.savings.monthly = [];
+            // Ensure enabledTabs exists (older saved settings won't have it)
+            if (!state.settings.enabledTabs) state.settings.enabledTabs = defaultEnabledTabs();
         }
 
         function initApp() {
@@ -2641,6 +3129,9 @@
             setInterval(updateClock, 1000);
             startActivityEngine();
             checkNotifications();
+            checkWhatsAppReminders();
+            setInterval(checkWhatsAppReminders, 20000); // dedicated, tighter cadence than the general activity engine
+            applyTabVisibility();
             // Switch to default tab
             switchTab(state.settings.defaultTab || 'dashboard');
             renderAll();
@@ -2751,7 +3242,73 @@
            ============================================================ */
         const tabMap = ['dashboard', 'analytics', 'trades', 'gym', 'tasks', 'habits', 'savings'];
 
+        // Dashboard is always available; the rest can be switched off when not in use.
+        const TOGGLEABLE_TABS = [
+            { key: 'analytics', label: 'Analytics', icon: 'fa-chart-pie' },
+            { key: 'trades', label: 'Trades', icon: 'fa-chart-line' },
+            { key: 'gym', label: 'Gym', icon: 'fa-dumbbell' },
+            { key: 'tasks', label: 'Tasks', icon: 'fa-check-square' },
+            { key: 'habits', label: 'Habits', icon: 'fa-sync-alt' },
+            { key: 'savings', label: 'Savings', icon: 'fa-wallet' },
+            { key: 'reminders', label: 'Reminders', icon: 'fa-bell' },
+        ];
+
+        function defaultEnabledTabs() {
+            const map = {};
+            TOGGLEABLE_TABS.forEach(t => map[t.key] = true);
+            return map;
+        }
+
+        function renderTabManager() {
+            const list = document.getElementById('tabManagerList');
+            if (!list) return;
+            const enabled = state.settings.enabledTabs || defaultEnabledTabs();
+            list.innerHTML = TOGGLEABLE_TABS.map(t => `
+                <div class="tab-toggle-row">
+                    <span><i class="fas ${t.icon}"></i> ${t.label}</span>
+                    <label class="switch">
+                        <input type="checkbox" data-tab-toggle="${t.key}" ${enabled[t.key] !== false ? 'checked' : ''}>
+                        <span class="switch-slider"></span>
+                    </label>
+                </div>
+            `).join('');
+        }
+
+        function applyTabVisibility() {
+            const enabled = state.settings.enabledTabs || defaultEnabledTabs();
+            TOGGLEABLE_TABS.forEach(t => {
+                const btn = document.querySelector('.nav-btn[data-tab="' + t.key + '"]');
+                if (btn) btn.style.display = enabled[t.key] === false ? 'none' : '';
+            });
+            // If the currently active tab just got turned off, fall back to dashboard.
+            if (enabled[state.currentTab] === false) {
+                switchTab('dashboard');
+            }
+            applyAnalyticsVisibility();
+        }
+
+        function applyAnalyticsVisibility() {
+            const enabled = state.settings.enabledTabs || defaultEnabledTabs();
+            // Individual metric cards (Trading P/L, Gym Sessions, Savings Net, habits row)
+            document.querySelectorAll('[data-analytics-module]').forEach(card => {
+                const mod = card.dataset.analyticsModule;
+                card.style.display = enabled[mod] === false ? 'none' : '';
+            });
+            // Hide the whole 3-column row if every card in it is hidden, so we don't
+            // leave an empty gap on the Analytics page.
+            const metricsRow = document.getElementById('analyticsMetricsRow');
+            if (metricsRow) {
+                const anyVisible = ['trades', 'gym', 'savings'].some(m => enabled[m] !== false);
+                metricsRow.style.display = anyVisible ? '' : 'none';
+            }
+        }
+
         function switchTab(tab) {
+            // Guard: never switch to a tab the user has turned off.
+            const enabled = state.settings.enabledTabs || defaultEnabledTabs();
+            if (tab !== 'dashboard' && enabled[tab] === false) {
+                tab = 'dashboard';
+            }
             state.currentTab = tab;
             document.querySelectorAll('.tab-section').forEach(el => el.classList.remove('active'));
             const target = document.getElementById('tab-' + tab);
@@ -2771,6 +3328,7 @@
             if (tab === 'habits') renderHabits();
             if (tab === 'savings') renderSavings();
             if (tab === 'analytics') renderAnalytics();
+            if (tab === 'reminders') renderReminders();
         }
 
         document.querySelectorAll('.nav-btn[data-tab]').forEach(btn => {
@@ -2793,6 +3351,7 @@
             renderAnalyticsCharts();
             updateProductivityScore();
             updateKPIs();
+            renderReminders();
         }
 
         /* ============================================================
@@ -3025,13 +3584,14 @@
 
         function renderNotifications() {
             const container = document.getElementById('notifList');
+            // Only unread notifications stay visible — marking one read makes it disappear.
             const unread = state.notifications.filter(n => !n.read);
-            if (!state.notifications.length) {
+            if (!unread.length) {
                 container.innerHTML = '<div class="empty-state"><i class="fas fa-check-circle"></i><p>All caught up! 🎉</p></div>';
                 return;
             }
-            container.innerHTML = state.notifications.slice(0, 20).map(n => `
-            <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border-glass);opacity:${n.read ? 0.6 : 1};">
+            container.innerHTML = unread.slice(0, 20).map(n => `
+            <div id="notif-${n.id}" style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border-glass);transition:opacity 0.25s ease;">
               <div style="width:36px;height:36px;min-width:36px;border-radius:8px;background:var(--bg-card);display:flex;align-items:center;justify-content:center;color:${n.severity === 'warning' ? 'var(--accent-5)' : 'var(--accent-1)'};">
                 <i class="fas ${n.icon || 'fa-bell'}"></i>
               </div>
@@ -3039,7 +3599,7 @@
                 <div style="font-size:14px;">${n.text}</div>
                 <div style="font-size:11px;color:var(--text-muted);">${fmtDate(n.date)}</div>
               </div>
-              <button class="btn btn-sm btn-ghost" style="padding:2px 8px;font-size:11px;" onclick="markNotifRead('${n.id}')">${n.read ? '✓' : 'Read'}</button>
+              <button class="btn btn-sm btn-ghost" style="padding:2px 8px;font-size:11px;" onclick="markNotifRead('${n.id}')">Read</button>
             </div>
           `).join('');
         }
@@ -3049,7 +3609,14 @@
             if (n) n.read = true;
             save(KEYS.NOTIFICATIONS, state.notifications);
             updateNotifDot();
-            renderNotifications();
+            // Fade the item out, then remove it from the list so it visibly disappears.
+            const el = document.getElementById('notif-' + id);
+            if (el) {
+                el.style.opacity = '0';
+                setTimeout(renderNotifications, 220);
+            } else {
+                renderNotifications();
+            }
         }
 
         /* ============================================================
@@ -3481,9 +4048,341 @@
         });
 
         /* ============================================================
+           REMINDERS — scheduled WhatsApp alerts
+           Everything here runs client-side while this tab is open.
+           "Manual" delivery opens a pre-filled wa.me chat link (the
+           only way a browser can hand a message to WhatsApp without
+           a backend); "webhook" delivery POSTs to a URL of the
+           user's own choosing so a real automation/backend they
+           control can actually send it — no WhatsApp credentials are
+           ever stored or hard-coded here.
+           ============================================================ */
+        let editingReminderId = null;
+
+        function reminderDueDate(r) {
+            return new Date((r.dueDate || today()) + 'T' + (r.dueTime || '09:00') + ':00');
+        }
+
+        function fillReminderMessage(r, due, kind) {
+            const timeStr = due.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+            const dateStr = fmtDate(r.dueDate);
+            let msg = (r.message && r.message.trim()) || (r.title + ' is due.');
+            msg = msg.replace(/\{\{title\}\}/g, r.title)
+                     .replace(/\{\{time\}\}/g, timeStr)
+                     .replace(/\{\{date\}\}/g, dateStr)
+                     .replace(/\{\{name\}\}/g, state.profile.name || 'there');
+            if (kind === 'overdue') msg = '⏰ OVERDUE — ' + msg;
+            else if (kind === 'lead') msg = '🔔 Upcoming — ' + msg;
+            return msg;
+        }
+
+        function waLink(phone, message) {
+            const digits = (phone || '').replace(/[^0-9+]/g, '').replace(/^\+/, '');
+            return 'https://wa.me/' + digits + '?text=' + encodeURIComponent(message);
+        }
+
+        function logReminderEvent(reminder, kind, message, channel, ok) {
+            state.reminderLog.unshift({
+                id: uid(), reminderId: reminder.id, title: reminder.title, kind, message,
+                channel, ok, phone: reminder.phone, timestamp: Date.now()
+            });
+            if (state.reminderLog.length > 200) state.reminderLog = state.reminderLog.slice(0, 200);
+            save(KEYS.REMINDER_LOG, state.reminderLog);
+            renderReminderLog();
+        }
+
+        function openManualWhatsApp(phone, message, reminder, kind) {
+            // Browsers only reliably allow a popup from a direct user gesture (and
+            // pop-up blockers would likely eat a timer-triggered window.open), so
+            // we surface a persistent, click-to-send toast instead of pretending
+            // to have sent anything automatically.
+            const link = waLink(phone, message);
+            const t = document.createElement('div');
+            t.className = 'toast info';
+            t.style.cursor = 'pointer';
+            t.innerHTML = '<i class="fab fa-whatsapp" style="color:#25D366;"></i> "' + reminder.title.replace(/</g, '&lt;') + '" is due — tap to send on WhatsApp';
+            t.addEventListener('click', () => { window.open(link, '_blank'); t.remove(); });
+            document.getElementById('toastContainer').appendChild(t);
+            setTimeout(() => t.remove(), 20000);
+            logReminderEvent(reminder, kind, message, 'manual-link', true);
+        }
+
+        async function deliverReminder(reminder, kind) {
+            const due = reminderDueDate(reminder);
+            const message = fillReminderMessage(reminder, due, kind);
+            const phone = (reminder.phone || state.settings.whatsappNumber || state.profile.phone || '').trim();
+
+            if (state.settings.desktopNotifs && 'Notification' in window && Notification.permission === 'granted') {
+                try { new Notification('Victor AI — ' + reminder.title, { body: message, icon: undefined }); } catch {}
+            }
+
+            if (!phone) {
+                addNotification('Reminder "' + reminder.title + '" is due but has no WhatsApp number set.', 'reminder', 'fa-bell', 'warning');
+                logReminderEvent(reminder, kind, message, 'none', false);
+                return;
+            }
+
+            const mode = state.settings.reminderDeliveryMode || 'manual';
+            if (mode === 'webhook' && state.settings.reminderWebhookUrl) {
+                try {
+                    await fetch(state.settings.reminderWebhookUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ phone, message, title: reminder.title, kind, dueAt: due.toISOString() })
+                    });
+                    logReminderEvent(reminder, kind, message, 'webhook', true);
+                    showToast('WhatsApp reminder sent via webhook: ' + reminder.title, 'success');
+                } catch (e) {
+                    logReminderEvent(reminder, kind, message, 'webhook', false);
+                    showToast('Webhook unreachable for "' + reminder.title + '" — showing manual send instead', 'warning');
+                    openManualWhatsApp(phone, message, reminder, kind);
+                }
+            } else {
+                openManualWhatsApp(phone, message, reminder, kind);
+            }
+
+            addNotification((kind === 'overdue' ? 'OVERDUE: ' : kind === 'lead' ? 'Upcoming: ' : 'Due now: ') + reminder.title,
+                'reminder', 'fa-bell', kind === 'overdue' ? 'error' : 'warning');
+        }
+
+        function checkWhatsAppReminders() {
+            if (!state.reminders || !state.reminders.length) return;
+            const now = Date.now();
+            let changed = false;
+            state.reminders.forEach(r => {
+                if (!r.enabled || r.status === 'done') return;
+                const due = reminderDueDate(r);
+                r.firedKeys = r.firedKeys || [];
+                (r.leadMinutes && r.leadMinutes.length ? r.leadMinutes : [0]).forEach(lead => {
+                    const triggerAt = due.getTime() - lead * 60000;
+                    const fireKey = due.toISOString() + '|' + lead;
+                    if (now >= triggerAt && !r.firedKeys.includes(fireKey)) {
+                        r.firedKeys.push(fireKey);
+                        deliverReminder(r, lead === 0 ? 'due' : 'lead');
+                        changed = true;
+                    }
+                });
+                if (now > due.getTime() && r.overdueEnabled) {
+                    const everyMs = Math.max(5, r.overdueEveryMinutes || 60) * 60000;
+                    const lastFire = r.lastOverdueFire || due.getTime();
+                    if (now - lastFire >= everyMs) {
+                        r.lastOverdueFire = now;
+                        deliverReminder(r, 'overdue');
+                        changed = true;
+                    }
+                }
+            });
+            if (changed) save(KEYS.REMINDERS, state.reminders);
+        }
+
+        function advanceReminder(r) {
+            const due = reminderDueDate(r);
+            if (r.repeat === 'daily') due.setDate(due.getDate() + 1);
+            else if (r.repeat === 'weekly') due.setDate(due.getDate() + 7);
+            else if (r.repeat === 'monthly') due.setMonth(due.getMonth() + 1);
+            r.dueDate = due.toISOString().split('T')[0];
+            r.firedKeys = [];
+            r.lastOverdueFire = null;
+        }
+
+        function markReminderDone(id) {
+            const r = state.reminders.find(x => x.id === id);
+            if (!r) return;
+            if (r.repeat && r.repeat !== 'none') {
+                advanceReminder(r);
+                showToast('Rescheduled "' + r.title + '" for ' + fmtDate(r.dueDate));
+            } else {
+                r.status = 'done';
+                r.enabled = false;
+                showToast('Reminder marked done ✓');
+            }
+            save(KEYS.REMINDERS, state.reminders);
+            renderReminders();
+            logActivity('Marked reminder done: ' + r.title, 'Reminders', 'fa-bell', 'success');
+        }
+
+        function toggleReminderEnabled(id, on) {
+            const r = state.reminders.find(x => x.id === id);
+            if (!r) return;
+            r.enabled = on;
+            if (on && r.status === 'done') r.status = 'pending';
+            save(KEYS.REMINDERS, state.reminders);
+            renderReminders();
+        }
+
+        function deleteReminder(id) {
+            const r = state.reminders.find(x => x.id === id);
+            state.reminders = state.reminders.filter(x => x.id !== id);
+            save(KEYS.REMINDERS, state.reminders);
+            renderReminders();
+            logActivity('Deleted reminder' + (r ? ': ' + r.title : ''), 'Reminders', 'fa-trash', 'warning');
+            showToast('Reminder deleted', 'warning');
+        }
+
+        function editReminder(id) {
+            const r = state.reminders.find(x => x.id === id);
+            if (r) openReminderDrawer(r);
+        }
+
+        function reminderStatusBadge(r) {
+            if (r.status === 'done') return '<span class="badge badge-muted">Done</span>';
+            if (!r.enabled) return '<span class="badge badge-muted">Paused</span>';
+            if (Date.now() > reminderDueDate(r).getTime()) return '<span class="badge badge-danger">Overdue</span>';
+            return '<span class="badge badge-info">Pending</span>';
+        }
+
+        function renderReminders() {
+            const numInput = document.getElementById('waDefaultNumber');
+            if (numInput && document.activeElement !== numInput) numInput.value = state.settings.whatsappNumber || state.profile.phone || '';
+            const modeSel = document.getElementById('waDeliveryMode');
+            if (modeSel) {
+                modeSel.value = state.settings.reminderDeliveryMode || 'manual';
+                document.getElementById('waWebhookWrap').style.display = modeSel.value === 'webhook' ? 'block' : 'none';
+            }
+            const hookInput = document.getElementById('waWebhookUrl');
+            if (hookInput && document.activeElement !== hookInput) hookInput.value = state.settings.reminderWebhookUrl || '';
+
+            const tbody = document.getElementById('remindersTbody');
+            const empty = document.getElementById('remindersEmpty');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            if (!state.reminders.length) { empty.style.display = 'flex';
+                renderReminderLog(); return; }
+            empty.style.display = 'none';
+            state.reminders.slice().sort((a, b) => reminderDueDate(a) - reminderDueDate(b)).forEach(r => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+              <td style="padding:10px 8px;"><strong>${(r.title || '').replace(/</g, '&lt;')}</strong><div style="font-size:11px;color:var(--text-muted);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${(r.message || '').replace(/</g, '&lt;')}</div></td>
+              <td style="padding:10px 8px;">${(r.phone || '—').replace(/</g, '&lt;')}</td>
+              <td style="padding:10px 8px;">${fmtDate(r.dueDate)} ${r.dueTime || ''}</td>
+              <td style="padding:10px 8px;text-transform:capitalize;">${r.repeat && r.repeat !== 'none' ? r.repeat : 'Once'}</td>
+              <td style="padding:10px 8px;">${reminderStatusBadge(r)}</td>
+              <td style="padding:10px 8px;text-align:center;">
+                <label class="switch"><input type="checkbox" ${r.enabled ? 'checked' : ''} onchange="toggleReminderEnabled('${r.id}', this.checked)"><span class="switch-slider"></span></label>
+              </td>
+              <td style="padding:10px 8px;text-align:center;white-space:nowrap;">
+                <button class="btn btn-sm btn-ghost" title="Edit" onclick="editReminder('${r.id}')"><i class="fas fa-pen"></i></button>
+                <button class="btn btn-sm btn-ghost" title="${r.repeat && r.repeat !== 'none' ? 'Complete & reschedule' : 'Mark done'}" onclick="markReminderDone('${r.id}')"><i class="fas fa-check"></i></button>
+                <button class="btn btn-sm btn-ghost" title="Delete" onclick="deleteReminder('${r.id}')"><i class="fas fa-trash"></i></button>
+              </td>
+            `;
+                tbody.appendChild(tr);
+            });
+            renderReminderLog();
+        }
+
+        function renderReminderLog() {
+            const list = document.getElementById('reminderLogList');
+            const empty = document.getElementById('reminderLogEmpty');
+            if (!list) return;
+            if (!state.reminderLog.length) { empty.style.display = 'flex';
+                list.innerHTML = ''; return; }
+            empty.style.display = 'none';
+            list.innerHTML = state.reminderLog.slice(0, 30).map(e => `
+            <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border-glass);align-items:flex-start;">
+              <div style="width:36px;height:36px;min-width:36px;border-radius:8px;background:var(--bg-card);display:flex;align-items:center;justify-content:center;color:${e.ok ? 'var(--accent-1)' : 'var(--accent-4)'};">
+                <i class="fab fa-whatsapp"></i>
+              </div>
+              <div style="flex:1;">
+                <div style="font-size:13.5px;"><strong>${(e.title || '').replace(/</g, '&lt;')}</strong> — ${e.kind === 'overdue' ? 'Overdue alert' : e.kind === 'lead' ? 'Upcoming alert' : 'Due alert'}</div>
+                <div style="font-size:11px;color:var(--text-muted);">${new Date(e.timestamp).toLocaleString()} · ${(e.phone || '—').replace(/</g, '&lt;')} · ${e.channel === 'webhook' ? (e.ok ? 'Sent via webhook' : 'Webhook failed') : e.channel === 'manual-link' ? 'WhatsApp link opened' : 'No number set'}</div>
+              </div>
+              <span class="badge ${e.ok ? 'badge-success' : 'badge-danger'}">${e.ok ? 'OK' : 'Failed'}</span>
+            </div>
+          `).join('');
+        }
+
+        function openReminderDrawer(reminder) {
+            editingReminderId = reminder ? reminder.id : null;
+            document.getElementById('reminderDrawerTitle').textContent = reminder ? 'Edit Reminder' : 'New Reminder';
+            document.getElementById('remTitle').value = reminder ? reminder.title : '';
+            document.getElementById('remMessage').value = reminder ? reminder.message : 'Hi {{name}}, "{{title}}" is due at {{time}} on {{date}}.';
+            document.getElementById('remPhone').value = reminder ? reminder.phone : (state.settings.whatsappNumber || state.profile.phone || '');
+            document.getElementById('remDate').value = reminder ? reminder.dueDate : today();
+            document.getElementById('remTime').value = reminder ? reminder.dueTime : '09:00';
+            document.getElementById('remRepeat').value = reminder ? (reminder.repeat || 'none') : 'none';
+            document.querySelectorAll('#remLeadOptions input[type=checkbox]').forEach(cb => {
+                cb.checked = reminder ? (reminder.leadMinutes || [0]).includes(Number(cb.value)) : (Number(cb.value) === 0);
+            });
+            document.getElementById('remOverdueEnabled').checked = reminder ? !!reminder.overdueEnabled : true;
+            document.getElementById('remOverdueEvery').value = reminder ? (reminder.overdueEveryMinutes || 60) : 60;
+            document.getElementById('remEnabled').checked = reminder ? reminder.enabled !== false : true;
+            openDrawer('reminderDrawer');
+        }
+
+        document.getElementById('addReminderBtn').addEventListener('click', () => openReminderDrawer(null));
+
+        document.getElementById('saveReminderBtn').addEventListener('click', () => {
+            const title = document.getElementById('remTitle').value.trim();
+            const dueDate = document.getElementById('remDate').value;
+            const dueTime = document.getElementById('remTime').value;
+            if (!title || !dueDate || !dueTime) { showToast('Title, date and time are required', 'error'); return; }
+            const leadMinutes = Array.from(document.querySelectorAll('#remLeadOptions input[type=checkbox]:checked')).map(cb => Number(cb.value));
+            const payload = {
+                title,
+                message: document.getElementById('remMessage').value.trim() || (title + ' is due.'),
+                phone: document.getElementById('remPhone').value.trim(),
+                dueDate, dueTime,
+                repeat: document.getElementById('remRepeat').value,
+                leadMinutes: leadMinutes.length ? leadMinutes : [0],
+                overdueEnabled: document.getElementById('remOverdueEnabled').checked,
+                overdueEveryMinutes: parseInt(document.getElementById('remOverdueEvery').value, 10) || 60,
+                enabled: document.getElementById('remEnabled').checked,
+            };
+            if (editingReminderId) {
+                const r = state.reminders.find(x => x.id === editingReminderId);
+                Object.assign(r, payload);
+                r.status = 'pending';
+                r.firedKeys = [];
+                r.lastOverdueFire = null;
+                showToast('Reminder updated ✓');
+                logActivity('Updated reminder: ' + title, 'Reminders', 'fa-bell', 'success');
+            } else {
+                state.reminders.push(Object.assign(
+                    { id: uid(), status: 'pending', firedKeys: [], lastOverdueFire: null, createdAt: Date.now() },
+                    payload
+                ));
+                showToast('Reminder created ✓');
+                logActivity('Created reminder: ' + title, 'Reminders', 'fa-bell', 'success');
+            }
+            save(KEYS.REMINDERS, state.reminders);
+            closeAllDrawers();
+            renderReminders();
+        });
+
+        document.getElementById('waDeliveryMode').addEventListener('change', (e) => {
+            document.getElementById('waWebhookWrap').style.display = e.target.value === 'webhook' ? 'block' : 'none';
+        });
+
+        document.getElementById('saveWaSettingsBtn').addEventListener('click', () => {
+            state.settings.whatsappNumber = document.getElementById('waDefaultNumber').value.trim();
+            state.settings.reminderDeliveryMode = document.getElementById('waDeliveryMode').value;
+            state.settings.reminderWebhookUrl = document.getElementById('waWebhookUrl').value.trim();
+            save(KEYS.SETTINGS, state.settings);
+            showToast('WhatsApp delivery settings saved ✓');
+            logActivity('Updated WhatsApp delivery settings', 'Reminders', 'fa-cog', 'success');
+        });
+
+        document.getElementById('waDesktopNotifBtn').addEventListener('click', async () => {
+            if (!('Notification' in window)) { showToast('Desktop notifications are not supported in this browser', 'error'); return; }
+            const perm = await Notification.requestPermission();
+            state.settings.desktopNotifs = perm === 'granted';
+            save(KEYS.SETTINGS, state.settings);
+            showToast(perm === 'granted' ? 'Desktop alerts enabled ✓' : 'Permission not granted', perm === 'granted' ? 'success' : 'warning');
+        });
+
+        document.getElementById('clearReminderLogBtn').addEventListener('click', () => {
+            if (!confirm('Clear all notification history?')) return;
+            state.reminderLog = [];
+            save(KEYS.REMINDER_LOG, state.reminderLog);
+            renderReminderLog();
+        });
+
+        /* ============================================================
            ANALYTICS
            ============================================================ */
         function renderAnalytics() {
+            applyAnalyticsVisibility();
             // period selection
             document.querySelectorAll('[data-analytics-period]').forEach(btn => {
                 btn.onclick = () => {
@@ -3776,6 +4675,9 @@
                 { name: 'Tasks', icon: 'fa-check-square', action: () => switchTab('tasks') },
                 { name: 'Habits', icon: 'fa-sync-alt', action: () => switchTab('habits') },
                 { name: 'Savings', icon: 'fa-wallet', action: () => switchTab('savings') },
+                { name: 'Reminders', icon: 'fa-bell', action: () => switchTab('reminders') },
+                { name: 'Add Reminder', icon: 'fa-plus-circle', action: () => { switchTab('reminders');
+                        document.getElementById('addReminderBtn').click(); } },
                 { name: 'Add Trade', icon: 'fa-plus-circle', action: () => { switchTab('trades');
                         document.getElementById('addTradeBtn').click(); } },
                 { name: 'Add Workout', icon: 'fa-plus-circle', action: () => { switchTab('gym');
@@ -3950,12 +4852,19 @@
         });
 
         document.getElementById('saveProfileBtn').addEventListener('click', () => {
-            state.profile.name = document.getElementById('profileName').value.trim() || 'Victor';
-            state.profile.email = document.getElementById('profileEmail').value.trim();
+            state.profile.name = document.getElementById('profileName').value.trim() || state.profile.name || 'User';
             state.profile.phone = document.getElementById('profilePhone').value.trim();
             state.profile.bio = document.getElementById('profileBio').value.trim();
             state.profile.location = document.getElementById('profileLocation').value.trim();
             save(KEYS.PROFILE, state.profile);
+            // keep vd_users_v1 snapshot in sync
+            const users = load('vd_users_v1', {});
+            const email = state.auth.user && state.auth.user.email;
+            if (email && users[email]) {
+                users[email].profile = state.profile;
+                users[email].name = state.profile.name;
+                save('vd_users_v1', users);
+            }
             // Update auth user
             if (state.auth.user) state.auth.user.name = state.profile.name;
             save(KEYS.AUTH, state.auth);
@@ -3966,34 +4875,167 @@
         });
 
         /* ============================================================
-           SETTINGS DRAWER
+           FULL BACKUP / RESTORE
+           Everything the app stores lives only in this browser's
+           localStorage, under keys starting with "vd_" (all accounts'
+           trades, tasks, habits, savings, settings, etc). A backup
+           captures every one of those keys into one JSON file;
+           restore writes them straight back and reloads the page.
            ============================================================ */
-        document.getElementById('settingsBtn').addEventListener('click', () => {
+        function collectBackupData() {
+            const data = {};
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.startsWith('vd_')) data[key] = localStorage.getItem(key);
+            }
+            return data;
+        }
+
+        function downloadBackup() {
+            const payload = { app: 'Victor AI', exportedAt: new Date().toISOString(), data: collectBackupData() };
+            const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'victor-ai-backup-' + today() + '.json';
+            a.click();
+            showToast('Backup downloaded — keep it somewhere safe', 'success');
+            logActivity('Downloaded a full backup', 'Settings', 'fa-download', 'success');
+        }
+
+        function restoreBackup(file) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                let payload;
+                try { payload = JSON.parse(reader.result); } catch {
+                    showToast('That file is not a valid backup', 'error');
+                    return;
+                }
+                const data = (payload && typeof payload === 'object' && payload.data) ? payload.data : payload;
+                if (!data || typeof data !== 'object' || Array.isArray(data)) {
+                    showToast('That file is not a valid backup', 'error');
+                    return;
+                }
+                if (!confirm('Restoring will overwrite ALL data currently saved in this browser — every account, trade, task, habit and savings entry. This cannot be undone. Continue?')) return;
+                Object.keys(localStorage).filter(k => k.startsWith('vd_')).forEach(k => localStorage.removeItem(k));
+                Object.entries(data).forEach(([key, value]) => {
+                    if (key.startsWith('vd_') && typeof value === 'string') localStorage.setItem(key, value);
+                });
+                showToast('Backup restored — reloading...', 'success');
+                setTimeout(() => location.reload(), 900);
+            };
+            reader.onerror = () => showToast('Could not read that file', 'error');
+            reader.readAsText(file);
+        }
+
+        document.getElementById('downloadBackupBtn').addEventListener('click', downloadBackup);
+        document.getElementById('restoreBackupBtn').addEventListener('click', () => {
+            document.getElementById('restoreBackupInput').click();
+        });
+        document.getElementById('restoreBackupInput').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) restoreBackup(file);
+            e.target.value = '';
+        });
+
+        /* ============================================================
+           SETTINGS DRAWER — password gated, opens centered
+           ============================================================ */
+        function fillSettingsForm() {
             document.getElementById('setCurrency').value = state.settings.currency || 'NLE';
             document.getElementById('setDefaultTab').value = state.settings.defaultTab || 'dashboard';
             document.getElementById('setTheme').value = state.settings.theme || 'dark';
             document.getElementById('setName').value = state.profile.name || '';
-            document.getElementById('setEmail').value = state.profile.email || '';
+            document.getElementById('setEmail').value = (state.auth.user && state.auth.user.email) || state.profile.email || '';
             document.getElementById('setPhone').value = state.profile.phone || '';
             document.getElementById('setBio').value = state.profile.bio || '';
             document.getElementById('setLocation').value = state.profile.location || '';
+            renderTabManager();
+            renderAccountsList();
+            document.getElementById('secCurrentPassword').value = '';
+            document.getElementById('secNewEmail').value = '';
+            document.getElementById('secNewPassword').value = '';
+            document.getElementById('secConfirmPassword').value = '';
+            document.getElementById('secError').classList.remove('show');
+        }
+
+        function openSettingsGate() {
+            document.getElementById('settingsGatePassword').value = '';
+            document.getElementById('settingsGateError').classList.remove('show');
+            document.getElementById('settingsGateModal').classList.add('open');
+            document.getElementById('overlay').classList.add('show');
+            setTimeout(() => document.getElementById('settingsGatePassword').focus(), 50);
+        }
+
+        function closeSettingsGate() {
+            document.getElementById('settingsGateModal').classList.remove('open');
+            document.getElementById('overlay').classList.remove('show');
+        }
+
+        document.getElementById('settingsBtn').addEventListener('click', () => {
+            openSettingsGate();
+        });
+
+        document.getElementById('settingsGateCancelBtn').addEventListener('click', closeSettingsGate);
+        document.getElementById('overlay').addEventListener('click', closeSettingsGate);
+
+        document.getElementById('settingsGateUnlockBtn').addEventListener('click', async () => {
+            const entered = document.getElementById('settingsGatePassword').value;
+            const users = load('vd_users_v1', {});
+            const email = state.auth.user && state.auth.user.email;
+            const record = email ? users[email] : null;
+            const err = document.getElementById('settingsGateError');
+            const ok = entered && await verifyPassword(record, entered);
+            if (!ok) {
+                err.textContent = 'Incorrect password';
+                err.classList.add('show');
+                return;
+            }
+            save('vd_users_v1', users); // persist any legacy-password migration
+            err.classList.remove('show');
+            closeSettingsGate();
+            fillSettingsForm();
             openDrawer('settingsDrawer');
+        });
+
+        document.getElementById('settingsGatePassword').addEventListener('keydown', e => {
+            if (e.key === 'Enter') document.getElementById('settingsGateUnlockBtn').click();
         });
 
         document.getElementById('saveSettingsBtn').addEventListener('click', () => {
             state.settings.currency = document.getElementById('setCurrency').value;
             state.settings.defaultTab = document.getElementById('setDefaultTab').value;
             state.settings.theme = document.getElementById('setTheme').value;
-            state.profile.name = document.getElementById('setName').value.trim() || 'Victor';
-            state.profile.email = document.getElementById('setEmail').value.trim();
+            state.profile.name = document.getElementById('setName').value.trim() || state.profile.name || 'User';
             state.profile.phone = document.getElementById('setPhone').value.trim();
             state.profile.bio = document.getElementById('setBio').value.trim();
             state.profile.location = document.getElementById('setLocation').value.trim();
+
+            // Save which tabs are enabled/disabled
+            const enabledTabs = {};
+            document.querySelectorAll('#tabManagerList [data-tab-toggle]').forEach(cb => {
+                enabledTabs[cb.dataset.tabToggle] = cb.checked;
+            });
+            state.settings.enabledTabs = enabledTabs;
+            // If the default tab was just disabled, fall back to dashboard
+            if (state.settings.defaultTab !== 'dashboard' && enabledTabs[state.settings.defaultTab] === false) {
+                state.settings.defaultTab = 'dashboard';
+                document.getElementById('setDefaultTab').value = 'dashboard';
+            }
+
             save(KEYS.SETTINGS, state.settings);
             save(KEYS.PROFILE, state.profile);
+            // keep the profile snapshot inside vd_users_v1 in sync too
+            const users = load('vd_users_v1', {});
+            const email = state.auth.user && state.auth.user.email;
+            if (email && users[email]) {
+                users[email].profile = state.profile;
+                users[email].name = state.profile.name;
+                save('vd_users_v1', users);
+            }
             if (state.auth.user) state.auth.user.name = state.profile.name;
             save(KEYS.AUTH, state.auth);
             applyTheme(state.settings.theme);
+            applyTabVisibility();
             updateProfileUI();
             closeAllDrawers();
             showToast('Settings saved ✓');
@@ -4002,12 +5044,184 @@
             renderAll();
         });
 
-        document.getElementById('clearAllDataBtn').addEventListener('click', () => {
-            if (!confirm('⚠️ This will permanently delete ALL data. Are you sure?')) return;
-            Object.values(KEYS).forEach(k => localStorage.removeItem(k));
-            localStorage.removeItem('vd_users_v1');
-            showToast('All data cleared', 'warning');
-            setTimeout(() => location.reload(), 600);
+        /* ============================================================
+           CHANGE USERNAME / PASSWORD
+           ============================================================ */
+        document.getElementById('updateAccountBtn').addEventListener('click', async () => {
+            const err = document.getElementById('secError');
+            err.classList.remove('show');
+            const currentPass = document.getElementById('secCurrentPassword').value;
+            const newEmail = document.getElementById('secNewEmail').value.trim();
+            const newPass = document.getElementById('secNewPassword').value;
+            const confirmPass = document.getElementById('secConfirmPassword').value;
+
+            const users = load('vd_users_v1', {});
+            const oldEmail = state.auth.user && state.auth.user.email;
+            const record = oldEmail ? users[oldEmail] : null;
+
+            if (!record || !currentPass || !(await verifyPassword(record, currentPass))) {
+                err.textContent = 'Current password is incorrect';
+                err.classList.add('show');
+                return;
+            }
+            if (!newEmail && !newPass) {
+                err.textContent = 'Enter a new username/email and/or a new password';
+                err.classList.add('show');
+                return;
+            }
+            if (newEmail && users[newEmail] && newEmail !== oldEmail) {
+                err.textContent = 'That username/email is already taken';
+                err.classList.add('show');
+                return;
+            }
+            if (newPass && newPass.length < 6) {
+                err.textContent = 'New password must be at least 6 characters';
+                err.classList.add('show');
+                return;
+            }
+            if (newPass && newPass !== confirmPass) {
+                err.textContent = 'New passwords do not match';
+                err.classList.add('show');
+                return;
+            }
+
+            if (newPass) await setPassword(record, newPass);
+            const finalEmail = newEmail || oldEmail;
+            record.profile = state.profile;
+            record.profile.email = finalEmail;
+
+            if (finalEmail !== oldEmail) {
+                delete users[oldEmail];
+                users[finalEmail] = record;
+            } else {
+                users[oldEmail] = record;
+            }
+            save('vd_users_v1', users);
+
+            state.auth.user.email = finalEmail;
+            state.profile.email = finalEmail;
+            save(KEYS.AUTH, state.auth);
+            save(KEYS.PROFILE, state.profile);
+
+            document.getElementById('secCurrentPassword').value = '';
+            document.getElementById('secNewEmail').value = '';
+            document.getElementById('secNewPassword').value = '';
+            document.getElementById('secConfirmPassword').value = '';
+            document.getElementById('setEmail').value = finalEmail;
+            renderAccountsList();
+            updateProfileUI();
+            showToast('Account credentials updated ✓');
+            logActivity('Updated account security', 'Settings', 'fa-user-shield', 'success');
+        });
+
+        /* ============================================================
+           ACCOUNTS — admin creates accounts for others; anyone can switch
+           between accounts they know the password for
+           ============================================================ */
+        function isCurrentUserAdmin() {
+            return !!(state.auth.user && state.auth.user.role === 'admin');
+        }
+
+        function renderAccountsList() {
+            const list = document.getElementById('accountsList');
+            if (!list) return;
+            const users = load('vd_users_v1', {});
+            const currentEmail = state.auth.user && state.auth.user.email;
+            const emails = Object.keys(users);
+            const admin = isCurrentUserAdmin();
+
+            // Show/hide admin-only controls
+            document.getElementById('addAccountBtn').style.display = admin ? 'inline-flex' : 'none';
+            document.getElementById('nonAdminNotice').style.display = admin ? 'none' : 'block';
+            document.getElementById('adminCreateForm').style.display = 'none';
+
+            if (emails.length === 0) {
+                list.innerHTML = '<div style="font-size:12.5px;color:var(--text-muted);">No accounts yet.</div>';
+                return;
+            }
+            list.innerHTML = emails.map(email => {
+                const u = users[email];
+                const isCurrent = email === currentEmail;
+                const roleBadge = u.role === 'admin'
+                    ? '<span class="badge badge-info" style="margin-left:6px;">Admin</span>'
+                    : '';
+                return `
+                    <div class="account-item">
+                        <div class="account-meta">
+                            <strong>${(u.name || email).replace(/</g, '&lt;')} ${roleBadge} ${isCurrent ? '<span style="color:var(--accent-1);">(this account)</span>' : ''}</strong>
+                            <span>${email.replace(/</g, '&lt;')}</span>
+                        </div>
+                        <div style="display:flex;gap:6px;">
+                        ${isCurrent ? '' : `<button data-switch-account="${email.replace(/"/g, '&quot;')}"><i class="fas fa-right-left"></i> Switch</button>`}
+                        ${(!isCurrent && admin) ? `<button data-reset-account="${email.replace(/"/g, '&quot;')}"><i class="fas fa-key"></i> Reset Password</button>` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            list.querySelectorAll('[data-switch-account]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const email = btn.dataset.switchAccount;
+                    closeAllDrawers();
+                    doLogout();
+                    document.getElementById('loginEmail').value = email;
+                    document.getElementById('loginPassword').value = '';
+                    setTimeout(() => document.getElementById('loginPassword').focus(), 200);
+                    showToast('Enter the password for ' + email + ' to switch', 'info');
+                });
+            });
+            // Admin-only: set a new password for someone else's account directly —
+            // this is the app's actual "forgot password" fix, since there's no
+            // email server on a static page to send a real reset link from.
+            list.querySelectorAll('[data-reset-account]').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const email = btn.dataset.resetAccount;
+                    const newPass = prompt('Enter a new temporary password for ' + email + ' (min 6 characters):');
+                    if (newPass === null) return;
+                    if (newPass.length < 6) { showToast('Password must be at least 6 characters', 'error'); return; }
+                    const usersNow = load('vd_users_v1', {});
+                    const rec = usersNow[email];
+                    if (!rec) { showToast('Account not found', 'error'); return; }
+                    await setPassword(rec, newPass);
+                    save('vd_users_v1', usersNow);
+                    showToast('Password reset for ' + email + ' ✓');
+                    logActivity('Reset password for ' + email, 'Accounts', 'fa-key', 'success');
+                });
+            });
+        }
+
+        // Admin clicks "Create New Account" — reveal the inline form (no logout, no navigating away).
+        document.getElementById('addAccountBtn').addEventListener('click', () => {
+            if (!isCurrentUserAdmin()) return; // safety guard, button is hidden anyway
+            document.getElementById('newAcctName').value = '';
+            document.getElementById('newAcctEmail').value = '';
+            document.getElementById('newAcctPassword').value = '';
+            document.getElementById('newAcctRole').value = 'user';
+            document.getElementById('newAcctError').classList.remove('show');
+            document.getElementById('adminCreateForm').style.display = 'flex';
+        });
+
+        document.getElementById('cancelNewAcctBtn').addEventListener('click', () => {
+            document.getElementById('adminCreateForm').style.display = 'none';
+        });
+
+        document.getElementById('saveNewAcctBtn').addEventListener('click', async () => {
+            const name = document.getElementById('newAcctName').value.trim();
+            const email = document.getElementById('newAcctEmail').value.trim();
+            const password = document.getElementById('newAcctPassword').value;
+            const role = document.getElementById('newAcctRole').value;
+            const err = document.getElementById('newAcctError');
+
+            const result = await adminCreateAccount(name, email, password, role);
+            if (!result.ok) {
+                err.textContent = result.message;
+                err.classList.add('show');
+                return;
+            }
+            err.classList.remove('show');
+            document.getElementById('adminCreateForm').style.display = 'none';
+            renderAccountsList();
+            showToast(result.message);
+            logActivity('Created account for ' + name, 'Accounts', 'fa-user-plus', 'success');
         });
 
         document.getElementById('logoutBtn').addEventListener('click', () => {
@@ -4064,12 +5278,14 @@
            ============================================================ */
         // Start loading sequence
         runLoading(() => {
-            // Check auth
+            // Check auth — only auto-login if the user asked to be remembered.
+            // Otherwise (remember unchecked, or no session at all) land on the login page.
             const authData = load(KEYS.AUTH, null);
-            if (authData && authData.loggedIn) {
+            if (authData && authData.loggedIn && authData.user && authData.remember) {
                 state.auth = authData;
+                currentUserId = authData.user.id || authData.user.email;
                 // Load profile
-                state.profile = load(KEYS.PROFILE, { name: 'Victor', email: 'demo@victor.ai', phone: '', bio: '',
+                state.profile = load(KEYS.PROFILE, { name: '', email: authData.user.email || '', phone: '', bio: '',
                     location: '', avatar: null });
                 // Load all data
                 loadAllData();
@@ -4089,6 +5305,10 @@
         window.deleteHabit = deleteHabit;
         window.deleteSaving = deleteSaving;
         window.markNotifRead = markNotifRead;
+        window.editReminder = editReminder;
+        window.markReminderDone = markReminderDone;
+        window.toggleReminderEnabled = toggleReminderEnabled;
+        window.deleteReminder = deleteReminder;
         window.switchTab = switchTab;
         window.openDrawer = openDrawer;
         window.closeDrawer = closeDrawer;
@@ -4103,6 +5323,7 @@
                 renderAll();
                 updateClock();
                 checkNotifications();
+                checkWhatsAppReminders();
                 generateAIInsight();
             }
         });
